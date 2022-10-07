@@ -1,0 +1,135 @@
+<app-static></app-static>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0 classm ">
+          <div class="d-flex justify-content-between">
+            <h3 class="mb-0">Movement du stock</h3>
+            <div *ngIf="screenWidth>= 1040; else elseBlock">
+              <button type="button" class="btn btn-success"> <i class="fa-solid fa-cloud-arrow-down"></i> &nbsp;Exporter</button>
+            </div>
+          </div>
+        </div>
+        <ng-template #elseBlock>
+          <td class="text-right">
+            <div ngbDropdown placement="bottom-right">
+              <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                <i class="fas fa-ellipsis-v"></i>
+              </a>
+              <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                <a class="dropdown-item" href="javascript:void(0)" style="color:#2DCE89;"><i class="fa-solid fa-cloud-arrow-down"></i>&nbsp;Exporter</a>
+              </div>
+            </div>
+          </td>
+        </ng-template>
+        <hr>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <tbody>
+            <tr *ngFor="let c of articleshow">
+              <td class="w-50">
+                <div class="media align-items-center">
+                  <a href="javascript:void(0)" class="avatar rounded  w-auto" (click)="afficher(c.id)">
+                    <img alt="Image placeholder" src="{{ c.icon }}">
+                  </a>
+                </div>
+              </td>
+              <td class="w-50">
+                <div class="media-body">
+                  <ul class="list-unstyled">
+                    <li class="fs-4"><i class=" ni ni-bold-right " ></i> &nbsp;{{ c.codearticle }}</li><br>
+                    <li class="fs-5"><i class=" ni ni-bold-right " ></i> &nbsp;{{ c.description }}</li><br>
+                    <li class="fs-5"><i class=" ni ni-bold-right " ></i> &nbsp;{{ c.prixnt }}</li><br>
+                    <li class="fs-5"><i class=" ni ni-bold-right " ></i> &nbsp;{{ c.prixttc }}</li>
+                  </ul>
+                </div>
+              </td>
+              <td>
+                <div class="media-body">
+                  <ul class="list-unstyled">
+                    <li class="fs-5"><i class=" ni ni-bold-right " ></i> &nbsp;{{c.stockactuel}}</li><br>
+                    <li class="fa-align-center" class="fs-5"> &nbsp;&nbsp;{{c.Quantite}}</li><br>
+                    <li></li><br>
+                    <li>&nbsp;</li><br>
+                  </ul>
+                </div>
+              </td>
+              <td class="text-right"  >
+                <div >
+                  <ul class="list-unstyled">
+                    <li class="pl-3" data-toggle="modal" data-target="#exampleModal"><a class="dropdown-item" (click)="openModal()"  href="javascript:void(0)" style="color:#5FBA7D;" > <i class="fa-solid fa-pen-to-square"></i> &nbsp;Correction de stock</a></li><br>
+                  </ul>
+                  <ul class="list-unstyled">
+                  <li class="pl-3"><a class="dropdown-item" (click)="openDialog(c.id)" href="javascript:void(0)" style="color:#5B4283;" > <i class="fa-solid fa-list-check"></i> &nbsp;Consulter le stock&nbsp; </a></li><br>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer py-4" >
+          <nav aria-label="...">
+            <ul class="pagination justify-content-center mb-0">
+              <li class="page-item disabled">
+                <a class="page-link" href="javascript:void(0)" tabindex="-1">
+                  <i class="fas fa-angle-left"></i>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+              <li class="page-item active">
+                <a class="page-link" href="javascript:void(0)">1</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0)">2 <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0)">
+                  <i class="fas fa-angle-right"></i>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- open a modal window by clicking button  basic bootstrap-->
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h1 class="modal-title" class="d-flex">Correction de stock</h1>
+        <h1 (click)="onCloseHandled()" style="color:brown;" class="p-2"><i class="ni ni-fat-remove"></i></h1>
+      </div>
+      <div class="modal-body" style="margin-top: -30px; margin-bottom: -30px;">
+        <form>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Quantité</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Saisir la quantité">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Type de Correction</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+              <option>Correction positif</option>
+              <option>Correction négatif</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="onCloseHandled()" ><i class="ni ni-fat-remove"></i>&nbsp;Annuler</button>
+        <button type="button" class="btn btn-primary" (click)="onCloseHandled()" ><i class="fa-solid fa-floppy-disk"></i>&nbsp;Enregistrer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal !-->
+

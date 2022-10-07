@@ -1,0 +1,68 @@
+<app-static></app-static>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row ">
+    <div class="col ">
+      <div class="card shadow ">
+          <div>
+
+            <h3 class="d-flex justify-content-lg-start" style="padding-left: 20px; padding-top: 20px;margin-bottom: 0px;"> <i class="fa-solid fa-circle-plus blue-color"></i>&nbsp;Ajouter un article</h3>
+          </div>
+        <hr>
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+          <div class="d-flex align-items-between flex-column bd-highlight mb-3 p-3" >
+          <div class="row mt-3">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Code article" name="codearticle" style="height: 40px;border-color: #323C72" formControlName="codearticle">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Designation" name="Designation" style="height: 40px;border-color: #323C72" formControlName="Designation">
+            </div>
+          </div>
+          <!--sparet-->
+          <div class="row mt-3">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Prix unitaire HT" name="Prix_unitaire" style="height: 40px;border-color: #323C72" formControlName="Prix_unitaire">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Taux TVA" name="Taux_TVA" style="height: 40px;border-color: #323C72" formControlName="Taux_TVA">
+            </div>
+          </div>
+          <!--sparet-->
+          <div class="row mt-3" >
+              <div class="col" >
+                <input type="text" class="form-control" placeholder="Prix unitaire TTC" name="Prix_unitaireTTC" style="height: 40px;border-color: #323C72" formControlName="Prix_unitaireTTC">
+              </div>
+            <div class="col">
+            <select class="form-select" class="col"  style="height: 40px;border-color: #323C72;border-radius: 4px;" formControlName="category">
+                <option selected>Selectionner une categorie</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+          </div>
+
+            <div class="row mt-3" >
+              <div class="col" >
+                <input type="file" class="form-control" placeholder="Prix unitaire TTC" name="photo" style="height: 40px;border-color: #323C72" formControlName="photo">
+              </div>
+            </div>
+          </div>
+          <div class="card-footer py-4" >
+            <nav aria-label="...">
+              <ul class="pagination justify-content-end mb-0">
+                <div>
+                  <button type="button" class="btn btn-danger" (click)="close()"> <i class="fa-solid fa-xmark"></i> &nbsp; Annuler</button>
+                  <button type="submit" class="btn btn-primary"  ><i class="fa-solid fa-floppy-disk"></i> &nbsp;Enregistrer</button>
+                </div>
+              </ul>
+            </nav>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
